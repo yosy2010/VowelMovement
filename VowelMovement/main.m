@@ -10,8 +10,20 @@
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        // insert code here...
-        NSLog(@"Hello, World!");
+        
+        // array for the orignal string
+        NSArray *orignal = @[@"Sauerkraut", @"Raygun",
+                             @"Big Nerd Ranch", @"Mississippi"];
+        
+        // log the orignsl list
+        NSLog(@"Orignal Strings: %@", orignal);
+        
+        // array for devoowelized strings
+        NSMutableArray *devoowelized = [NSMutableArray array];
+        
+        // array for the list of the vowels
+        NSArray *vowles = @[@"a", @"e", @"i", @"o", @"u"];
+        
     }
     return 0;
 }

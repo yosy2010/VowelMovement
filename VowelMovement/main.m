@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+// define the block in a typedef so it's clearer
+typedef void(^ArrayEnumerationBlock)(id, NSUInteger, BOOL *);
+
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         
@@ -25,9 +28,18 @@ int main(int argc, const char * argv[]) {
         NSArray *vowles = @[@"a", @"e", @"i", @"o", @"u"];
         
         // declare a block that will devoowelize strings and return it to the devoowelizedStrings array
-        void(^devoowelizer)(id, NSUInteger, BOOL*);
+        ArrayEnumerationBlock devoowelizer;
         
         devoowelizer = ^(id string, NSUInteger i, BOOL *stop) {
+            
+            // give it a range of only the y letter
+            NSRange yRange = [string rangeOfString:@"y" options:NSCaseInsensitiveSearch];
+            
+            // did i find a y
+            if (yRange.location != NSNotFound) {
+                *stop = YES; // dont iterate any more
+                return; // and end this iteration
+            }
             
             // create an NSMutableString to add the sting and adgust it in it
             NSMutableString *newString = [NSMutableString stringWithString:string];

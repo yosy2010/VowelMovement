@@ -36,7 +36,7 @@ int main(int argc, const char * argv[]) {
             for (NSString *string in vowles) {
                 
                 // create a range of the length of the string
-                NSRange range = NSMakeRange(0, [string length]);
+                NSRange range = NSMakeRange(0, [newString length]);
                 
                 // replace the vowles with empty strings
                 [newString replaceOccurrencesOfString:string
@@ -50,6 +50,12 @@ int main(int argc, const char * argv[]) {
             [devoowelizedStrings addObject:newString];
             
         };
+        
+        // call the enumerateObjectsUsingBlock passing in the block on the orignal array to add the new strings to the array
+        [orignal enumerateObjectsUsingBlock:devoowelizer];
+        
+        // log the new result
+        NSLog(@"the strings after devowlizing them are: %@", devoowelizedStrings);
     }
     return 0;
 }

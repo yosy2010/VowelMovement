@@ -8,8 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-// define the block in a typedef so it's clearer
-typedef void(^ArrayEnumerationBlock)(id, NSUInteger, BOOL *);
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
@@ -27,10 +25,8 @@ int main(int argc, const char * argv[]) {
         // array for the list of the vowels
         NSArray *vowles = @[@"a", @"e", @"i", @"o", @"u"];
         
-        // declare a block that will devoowelize strings and return it to the devoowelizedStrings array
-        ArrayEnumerationBlock devoowelizer;
-        
-        devoowelizer = ^(id string, NSUInteger i, BOOL *stop) {
+        // call the enumerateObjectsUsingBlock passing in the block on the orignal array to add the new strings to the array
+        [orignal enumerateObjectsUsingBlock:^(id  _Nonnull string, NSUInteger idx, BOOL * _Nonnull stop) {
             
             // give it a range of only the y letter
             NSRange yRange = [string rangeOfString:@"y" options:NSCaseInsensitiveSearch];
@@ -55,16 +51,13 @@ int main(int argc, const char * argv[]) {
                                            withString:@""
                                               options:NSCaseInsensitiveSearch
                                                 range:range];
-            
+                
             }
             
             // add the string to the devoowelizedStrings array
             [devoowelizedStrings addObject:newString];
             
-        };
-        
-        // call the enumerateObjectsUsingBlock passing in the block on the orignal array to add the new strings to the array
-        [orignal enumerateObjectsUsingBlock:devoowelizer];
+        }];
         
         // log the new result
         NSLog(@"the strings after devowlizing them are: %@", devoowelizedStrings);
